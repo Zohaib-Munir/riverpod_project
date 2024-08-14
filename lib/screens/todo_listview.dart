@@ -13,18 +13,33 @@ class TodoListView extends ConsumerWidget {
     return ListView(
       children: [
         for (final element in todo)
-          CheckboxListTile(
-            value: element.completed,
-            onChanged: (value) {
-              ref.read(todoProvider.notifier).toggle(element.userID);
-            },
-            title: Text(
-              element.description,
-              style: GoogleFonts.urbanist(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+          Column(
+            children: [
+              CheckboxListTile(
+                title: Text(
+                  element.userID,
+                  style: GoogleFonts.urbanist(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                value: element.completed,
+                onChanged: (value) {
+                  ref.read(todoProvider.notifier).toggle(element.userID);
+                },
+                subtitle: Text(
+                  element.description,
+                  style: GoogleFonts.urbanist(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
-            ),
+              const Divider(
+                thickness: 2,
+                color: Color(0XFFF6FB7A),
+              ),
+            ],
           ),
       ],
     );
